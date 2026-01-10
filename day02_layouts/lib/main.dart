@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
+void main(){
   runApp(const MyApp());
 }
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'flutter demo',
+      title:'flutter demo',
       home: HomePage(),
     );
   }
@@ -23,70 +23,168 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text('My app bar', style: TextStyle(color: Colors.black)),
+      backgroundColor: Colors.white,
+      appBar:AppBar(
+        title: Text(
+          'My App Bar',
+        )
       ),
-      body: Column(
+      body:Column(
         children: [
-          //header
           Container(
-            color: Colors.amber,
+            width:double.infinity,
             height: 100,
-            width: double.infinity,
-            child: Center(
+            color: Colors.grey,
+            child:Center(
               child: Text(
-                'Header',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+                'Mini Dashboard',
+                style:TextStyle(
+                  color: Colors.black,
+                  fontSize: 26,
                   fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+                )
+              )
+            )
           ),
+          SizedBox(height: 10),
           //row
           Row(
+           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
                 child: Container(
-                  color: Colors.blue,
                   height: 100,
-                  child: Center(
-                    child: Text('box 1', style: TextStyle(color: Colors.white)),
+                  decoration: BoxDecoration(
+                    color: Colors.brown,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 10,
+                        offset: Offset(0,4),
+                      )
+                    ]
                   ),
-                ),
+                  child: Center(
+                    child:Text(
+                      'Box 1',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold
+                      )
+                    )
+                  )
+                )
               ),
+
               Expanded(
                 child: Container(
-                  color: Colors.green,
                   height: 100,
-                  child: Center(
-                    child: Text('box 2', style: TextStyle(color: Colors.white)),
+                  decoration: BoxDecoration(
+                    color: Colors.lime,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 10,
+                        offset: Offset(0,4),
+                      )
+                    ]
                   ),
-                ),
+                  child: Center(
+                    child:Text(
+                      'Box 2',
+                      style:TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold
+                      )
+                    )
+                  )
+                )
               ),
+
+              Expanded(
+                child: Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 10,
+                        offset: Offset(0,4),
+                      )
+                    ]
+                  ),
+                  child: Center(
+                    child:Text(
+                      'Box 3',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold
+                      )
+                    )
+                  )
+                )
+              )
             ],
           ),
+
+          SizedBox(height: 10),
+
           Expanded(
             child: Container(
-              color: Colors.grey,
+              color: Colors.teal,
               width: double.infinity,
-              height: double.infinity,
               child: Center(
                 child: Text(
-                  'expanded content',
+                  'Expanded Content',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24,
+                    fontSize: 26,
                     fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+                  )
+                )
+              )
             ),
           ),
+          SizedBox(height: 10),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                color: Colors.deepOrange,
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+                child: Center(
+                  child: Text(
+                    'Button 1',
+                    style:TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    )
+                  )
+                )
+              ),
+
+               Container(
+                color: Colors.purple,
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 25),
+                child: Center(
+                  child: Text(
+                    'Button 2',
+                    style:TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    )
+                  )
+                )
+              ),
+              
+            ]
+          ),
+          SizedBox(height: 10)
+
         ],
-      ),
+      ) 
     );
   }
 }
