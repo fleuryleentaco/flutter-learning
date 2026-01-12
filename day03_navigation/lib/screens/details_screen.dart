@@ -6,13 +6,13 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Details')),
+      appBar: AppBar(title: Text('Detais'), backgroundColor: Colors.blueGrey,),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text('Back to Home'),
+          child:Text('back to home')
         ),
       ),
     );

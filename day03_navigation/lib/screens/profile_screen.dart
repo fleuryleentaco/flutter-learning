@@ -6,13 +6,12 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String name = ModalRoute.of(context)!.settings.arguments as String;
-    return Scaffold(appBar: AppBar(title: const Text('Profile')),
-    body: Center(
-      child: Text(
-        'Welcome $name',
-        style: const TextStyle(fontSize: 24),
+    return Scaffold(
+      appBar: AppBar(
+        title:Text('Profile'),
+        backgroundColor: Colors.blue,
       ),
-    ),
+      body: Center(child:Text('Welcome $name'))
     );
   }
 }

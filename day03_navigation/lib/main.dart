@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Day 03 Navigation',
+      title: 'flutter demo',
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),

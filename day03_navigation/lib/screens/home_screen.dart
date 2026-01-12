@@ -6,26 +6,24 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/details');
-            },
-            child: const Text('Go to Details'),
-          ),
-          const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/profile', arguments: 'Lee Fleury');
-            },
-            child: const Text(
-              'Go to Profile'
+      appBar: AppBar(title: Text('Home'), backgroundColor: Colors.blueAccent,),
+      body: Center(
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/details');
+              },
+              child: Text('Go to Details'),
             ),
-          ),
-        ],
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/profile', arguments:'Lee Fleury');
+              },
+              child: Text('Go To profile'),
+            ),
+          ],
+        ),
       ),
     );
   }
