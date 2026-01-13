@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'dayy 04 state',
-      home: const CounterScreen(),
+      title: 'flutter demo',
+      home: CounterScreen(),
     );
   }
 }
