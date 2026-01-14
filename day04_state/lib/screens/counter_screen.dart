@@ -44,32 +44,26 @@ class _CounterScreenState extends State<CounterScreen> {
         backgroundColor: Colors.blueGrey,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            //header
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.brown,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(16),
               ),
               child: Text(
                 'Interactive Dashboard',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
-
-            const SizedBox(height: 30),
+            const SizedBox(height: 20),
             const Text(
               'Counter',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Text(
@@ -77,7 +71,7 @@ class _CounterScreenState extends State<CounterScreen> {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
             ),
-            //row
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -86,35 +80,42 @@ class _CounterScreenState extends State<CounterScreen> {
                 ElevatedButton(onPressed: increment, child: Text('+')),
               ],
             ),
-            const SizedBox(height:20),
-            //like
-            const Text('like state', style:TextStyle(fontWeight:FontWeight.bold)),
-           IconButton(
-            iconSize:50,
-            onPressed: toggleLike,
-            icon: Icon(
-              isLiked ? Icons.favorite : Icons.favorite_border,
-              color: isLiked ? Colors.red : Colors.grey,
+            const SizedBox(height: 10),
+            const Text(
+              'Like State',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-           ),
-           Text(
-            isLiked ? 'you like this' : "you don't like this",
-            textAlign: TextAlign.center,
-           ),
-           
+            IconButton(
+              iconSize:50,
+              onPressed:toggleLike,
+              icon:Icon(
+                isLiked ? Icons.favorite : Icons.favorite_border,
+                color: isLiked ? Colors.red : Colors.grey, 
+              ),
+            ),
+            Text(
+              isLiked ? 'you like this' : "you don't like this"
+            ),
+
             const Spacer(),
 
             ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                padding:EdgeInsets.symmetric(vertical: 20)
+                  style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  backgroundColor: Colors.black,
+
               ),
               onPressed:resetAll,
-              child: Text(
-                'reset all',
-                style:TextStyle(color:Colors.white)
+              child: Text('reset all',
+              textAlign: TextAlign.center,
+              style:TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
               )
+              ),
             )
+
+
           ],
         ),
       ),
