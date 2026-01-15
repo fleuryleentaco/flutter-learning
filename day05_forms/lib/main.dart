@@ -11,9 +11,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'flutter demo',
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
-      home: LoginScreen(),
+      title: 'Day 05 Forms',
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+      ),
+      home: const LoginScreen(),
     );
   }
 }
@@ -26,10 +28,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  //formKey
+  // 🔑 Form key
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  //controllers
+  // 🎮 Controllers
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -45,10 +47,11 @@ class _LoginScreenState extends State<LoginScreen> {
       feedbackMessage = '';
     });
 
+    // ⏳ Simulation API
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         isLoading = false;
-        feedbackMessage = 'Login successful';
+        feedbackMessage = 'Login successful 🎉';
       });
     });
   }
@@ -63,33 +66,40 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('My AppBar')),
+      appBar: AppBar(
+        title: const Text('Day 05 – Login Form'),
+      ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Form(
           key: _formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 30),
-
-              const Text(
-                'Welcome back',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              ),
               const SizedBox(height: 40),
 
-              //email
+              const Text(
+                'Welcome Back 👋',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              const SizedBox(height: 40),
+
+              // 📧 EMAIL
               TextFormField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  labelText: 'email',
+                decoration: const InputDecoration(
+                  labelText: 'Email',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.email),
                 ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.trim().isEmpty) {
                     return 'Email is required';
                   }
                   if (!value.contains('@') || !value.contains('.')) {
@@ -101,17 +111,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 20),
 
-              //password
+              // 🔒 PASSWORD
               TextFormField(
                 controller: passwordController,
                 obscureText: hidePassword,
                 decoration: InputDecoration(
-                  labelText: 'password',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.lock),
+                  labelText: 'Password',
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                     icon: Icon(
-                      hidePassword ? Icons.visibility : Icons.visibility_off,
+                      hidePassword
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                     ),
                     onPressed: () {
                       setState(() {
@@ -120,57 +132,53 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                 ),
-
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Password is required';
                   }
                   if (value.length < 6) {
-                    return 'Minimun 6 Characters';
+                    return 'Minimum 6 characters';
                   }
-
                   return null;
                 },
               ),
 
-              const SizedBox(height:30),
+              const SizedBox(height: 30),
 
-              //LoginButton
-
+              // 🔘 LOGIN BUTTON
               ElevatedButton(
-                style:ElevatedButton.styleFrom(
-                  padding:EdgeInsets.symmetric(vertical: 15, horizontal: 40)
+                onPressed: isLoading ? null : submitLogin,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
                 ),
-                onPressed: isLoading ? null :submitLogin,
-
-                child: isLoading 
-                ? const SizedBox(
-                  height:22,
-                  width:22,
-                  child:CircularProgressIndicator(
-                    strokeAlign:2,
-                    color:Colors.white,
-                  )
-                )
-                : const Text(
-                  'Login',
-                  style:TextStyle(fontSize:16)
-                )
+                child: isLoading
+                    ? const SizedBox(
+                        height: 22,
+                        width: 22,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Text(
+                        'Login',
+                        style: TextStyle(fontSize: 16),
+                      ),
               ),
 
-              const SizedBox(height:20),
+              const SizedBox(height: 20),
 
-              //feedback
-              if(feedbackMessage.isNotEmpty)
-              Text(
-                feedbackMessage,
-                textAlign: TextAlign.center,
-                style:TextStyle(
-                  color:Colors.green,
-                  fontSize:16,
-                  fontWeight:FontWeight.bold,
-                )
-              )
+              // 📢 FEEDBACK
+              if (feedbackMessage.isNotEmpty)
+                Text(
+                  feedbackMessage,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.green,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
             ],
           ),
         ),
