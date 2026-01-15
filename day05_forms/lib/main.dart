@@ -11,8 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Day 05 Forms',
-      home: const LoginScreen(),
+      title: 'flutter demo',
+      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      home: LoginScreen(),
     );
   }
 }
@@ -25,31 +26,31 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  //key du formulaire
-  final _formKey = GlobalKey<FormState>();
+  //formKey
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  //controllers
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   bool isLoading = false;
-  String message = '';
+  bool hidePassword = true;
+  String feedbackMessage = '';
 
-  void submitForm() {
-    if (_formKey.currentState!.validate()) {
+  void submitLogin() {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() {
+      isLoading = true;
+      feedbackMessage = '';
+    });
+
+    Future.delayed(const Duration(seconds: 2), () {
       setState(() {
-        isLoading = true;
-        message = '';
+        isLoading = false;
+        feedbackMessage = 'Login successful';
       });
-
-      // simulation d'un login (api plus tard)
-
-      Future.delayed(const Duration(seconds: 2), () {
-        setState(() {
-          isLoading = false;
-          message = 'Login successful';
-        });
-      });
-    }
+    });
   }
 
   @override
@@ -62,32 +63,28 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Day 05 - Loginn form'),
-        backgroundColor: Colors.deepPurple,
-      ),
+      appBar: AppBar(title: Text('My AppBar')),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: Form(
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 30),
 
               const Text(
-                'welcome Back',
+                'Welcome back',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 40),
 
-              //Email
+              //email
               TextFormField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
+                decoration: InputDecoration(
+                  labelText: 'email',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.email),
                 ),
@@ -95,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (value == null || value.isEmpty) {
                     return 'Email is required';
                   }
-                  if (!value.contains('@')) {
+                  if (!value.contains('@') || !value.contains('.')) {
                     return 'Enter a valid email';
                   }
                   return null;
@@ -104,51 +101,75 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 20),
 
-              //Password
+              //password
               TextFormField(
                 controller: passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
+                obscureText: hidePassword,
+                decoration: InputDecoration(
+                  labelText: 'password',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      hidePassword ? Icons.visibility : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        hidePassword = !hidePassword;
+                      });
+                    },
+                  ),
                 ),
+
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Passwordis required';
+                    return 'Password is required';
                   }
                   if (value.length < 6) {
-                    return 'Minimum 6 caracters';
+                    return 'Minimun 6 Characters';
                   }
+
                   return null;
                 },
               ),
+
               const SizedBox(height:30),
+
+              //LoginButton
 
               ElevatedButton(
                 style:ElevatedButton.styleFrom(
-                  backgroundColor: Colors.deepPurple,
-                  padding: const EdgeInsets.symmetric(vertical:15),
+                  padding:EdgeInsets.symmetric(vertical: 15, horizontal: 40)
                 ),
-                onPressed: isLoading ? null : submitForm,
-                child: isLoading
-                ? const CircularProgressIndicator(color:Colors.white)
+                onPressed: isLoading ? null :submitLogin,
+
+                child: isLoading 
+                ? const SizedBox(
+                  height:22,
+                  width:22,
+                  child:CircularProgressIndicator(
+                    strokeAlign:2,
+                    color:Colors.white,
+                  )
+                )
                 : const Text(
                   'Login',
-                  style:TextStyle(fontSize:16, color:Colors.white,)
+                  style:TextStyle(fontSize:16)
                 )
               ),
 
               const SizedBox(height:20),
 
-              //message
-
-              if(message.isNotEmpty)
+              //feedback
+              if(feedbackMessage.isNotEmpty)
               Text(
-
-                message,
-                textAlign:TextAlign.center,
-                style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold)
+                feedbackMessage,
+                textAlign: TextAlign.center,
+                style:TextStyle(
+                  color:Colors.green,
+                  fontSize:16,
+                  fontWeight:FontWeight.bold,
+                )
               )
             ],
           ),
